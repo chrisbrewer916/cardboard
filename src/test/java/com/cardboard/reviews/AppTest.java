@@ -3,6 +3,7 @@ package com.cardboard.reviews;
 import java.util.UUID;
 
 import com.cardboard.reviews.api.ReviewRequest;
+import com.cardboard.reviews.dao.ReviewDB;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,10 +41,10 @@ public class AppTest
      */
     public void testApp() throws JsonProcessingException
     {
-    	ObjectMapper mapper = new ObjectMapper();
-    	UUID id = UUID.randomUUID();
-    	ReviewRequest r = new ReviewRequest("chris", id, 2, "cool", null);
-    	System.out.println(mapper.writeValueAsString(r));
+//    	ReviewDB.addUser(UUID.randomUUID(), "chris");
+//    	ObjectMapper mapper = new ObjectMapper();
+//    	ReviewRequest r = new ReviewRequest("chris", UUID.randomUUID(), 2, "cool", null);
+//    	System.out.println(mapper.writeValueAsString(r));
         assertTrue( true );
     }
 }

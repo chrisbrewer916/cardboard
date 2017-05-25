@@ -68,4 +68,8 @@ public class ReviewDB {
 		}
 		throw new NotFoundException("Could not find user:" + userName);
 	}
+
+	public static String addUser(UUID id, String userName) {
+		return users.put(id, userName);
+	}
 }
