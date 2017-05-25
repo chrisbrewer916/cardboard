@@ -4,13 +4,15 @@ import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
+import com.cardboard.reviews.dao.ReviewDB;
+
 public class ReviewRequest {
 
 	// the ID of this request
 	private UUID id;
 
 	// who, what, when...
-	private String user;
+	private UUID userId;
 	private UUID thingId;
 	private Date date;
 
@@ -27,6 +29,7 @@ public class ReviewRequest {
 	public ReviewRequest(String user, UUID thingId, int overallRating, String description,
 			Map<String, Integer> otherRatings) {
 		this();
+		this.userId = ReviewDB.getUser(user);
 		this.thingId = thingId;
 		this.overallRating = overallRating;
 		this.description = description;
@@ -37,8 +40,8 @@ public class ReviewRequest {
 		return id;
 	}
 
-	public String getUser() {
-		return user;
+	public UUID getUserId() {
+		return userId;
 	}
 	
 	public UUID getThingId() {

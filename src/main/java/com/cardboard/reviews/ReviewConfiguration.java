@@ -2,7 +2,7 @@ package com.cardboard.reviews;
 
 import io.dropwizard.Configuration;
 
-public class CardboardConfiguration extends Configuration {
+public class ReviewConfiguration extends Configuration {
 //    @NotEmpty
 //    private String template;
 //

@@ -12,7 +12,7 @@ public class Review {
 	private UUID id;
 
 	// who, what, when...
-	private String user;
+	private UUID userId;
 	private UUID thingId;
 	private Date reviewDate;
 	
@@ -21,10 +21,10 @@ public class Review {
 	private Optional<String> description;
 	private Optional<Map<String, Integer>> otherRatings;
 
-	public Review(String user, Date date, UUID thingId, int overallRating, Optional<String> description, Optional<Map<String, Integer>> otherRatings) {
+	public Review(UUID userId, Date date, UUID thingId, int overallRating, Optional<String> description, Optional<Map<String, Integer>> otherRatings) {
 		super();
 		this.id = UUID.randomUUID();
-		this.user = user;
+		this.userId = userId;
 		this.reviewDate = date;
 		this.thingId = thingId;
 		this.overallRating = overallRating;
@@ -33,15 +33,15 @@ public class Review {
 	}
 
 	public Review(ReviewRequest reviewRequest) {		
-		this(reviewRequest.getUser(), reviewRequest.getDate(), reviewRequest.getThingId(), reviewRequest.getOverallRating(), Optional.ofNullable(reviewRequest.getDescription()), Optional.ofNullable(reviewRequest.getOtherRatings()));
+		this(reviewRequest.getUserId(), reviewRequest.getDate(), reviewRequest.getThingId(), reviewRequest.getOverallRating(), Optional.ofNullable(reviewRequest.getDescription()), Optional.ofNullable(reviewRequest.getOtherRatings()));
 	}
 
 	public UUID getId() {
 		return id;
 	}
 
-	public String user() {
-		return user;
+	public UUID getUserId() {
+		return userId;
 	}
 	
 	public UUID getThingId() {
