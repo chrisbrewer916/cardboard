@@ -1,4 +1,4 @@
-package com.cardboard.reviewers.model;
+package com.cardboard.reviews.model;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,10 +17,15 @@ public class ReviewSummary {
 	}
 
 	public void setReviews(Collection<Review> reviews) {
-		this.reviews = Optional.of(reviews);
+		this.reviews = reviews == null || reviews.isEmpty() ? Optional.empty() : Optional.of(reviews);
 	}
-	
+
 	public boolean addReview(Review review) {
+		
+		if (review == null) {
+			return false;
+		}
+		
 		if (reviews.isPresent()) {
 			return reviews.get().add(review);
 		}

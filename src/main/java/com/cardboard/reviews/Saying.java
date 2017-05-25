@@ -1,4 +1,4 @@
-package com.cardboard.reviewers;
+package com.cardboard.reviews;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;

@@ -1,4 +1,10 @@
-package com.cardboard.reviewers;
+package com.cardboard.reviews;
+
+import java.util.UUID;
+
+import com.cardboard.reviews.api.ReviewRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -30,9 +36,14 @@ public class AppTest
 
     /**
      * Rigourous Test :-)
+     * @throws JsonProcessingException 
      */
-    public void testApp()
+    public void testApp() throws JsonProcessingException
     {
+    	ObjectMapper mapper = new ObjectMapper();
+    	UUID id = UUID.randomUUID();
+    	ReviewRequest r = new ReviewRequest("chris", id, 2, "cool", null);
+    	System.out.println(mapper.writeValueAsString(r));
         assertTrue( true );
     }
 }

@@ -1,4 +1,4 @@
-package com.cardboard.reviewers;
+package com.cardboard.reviews;
 
 import com.codahale.metrics.health.HealthCheck;
 

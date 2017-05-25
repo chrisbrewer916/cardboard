@@ -1,7 +1,6 @@
-package com.cardboard.reviewers;
+package com.cardboard.reviews;
 
-import com.cardboard.reviewers.api.CardboardResource;
-import com.cardboard.reviewers.api.ReviewResource;
+import com.cardboard.reviews.api.ReviewResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -24,13 +23,11 @@ public class CardboardApplication extends Application<CardboardConfiguration> {
 
 	@Override
 	public void run(CardboardConfiguration configuration, Environment environment) {
-		final CardboardResource resource = new CardboardResource(configuration.getTemplate(),
-				configuration.getDefaultName());
 		final ReviewResource reviewResource = new ReviewResource();
 		
-		final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
-		environment.healthChecks().register("template", healthCheck);
-		environment.jersey().register(resource);
+//		final TemplateHealthCheck healthCheck = new TemplateHealthCheck(configuration.getTemplate());
+//		environment.healthChecks().register("template", healthCheck);
+
 		environment.jersey().register(reviewResource);
 	}
 }
