@@ -1,11 +1,6 @@
 package com.cardboard.reviews;
 
-import java.util.UUID;
-
-import com.cardboard.reviews.api.ReviewRequest;
-import com.cardboard.reviews.dao.ReviewDB;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

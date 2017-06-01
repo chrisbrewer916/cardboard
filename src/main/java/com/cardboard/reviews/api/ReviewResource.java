@@ -1,7 +1,6 @@
 package com.cardboard.reviews.api;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.Optional;
 
 import javax.ws.rs.GET;
@@ -11,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.cardboard.reviews.dao.ReviewDB;
+import com.cardboard.reviews.dao.ReviewDao;
 import com.cardboard.reviews.model.Review;
 import com.cardboard.reviews.model.ReviewSummary;
 import com.codahale.metrics.annotation.Timed;
@@ -20,23 +19,26 @@ import com.codahale.metrics.annotation.Timed;
 @Produces(MediaType.APPLICATION_JSON)
 public class ReviewResource {
 
-	public ReviewResource() {
+	private ReviewDao reviewDao;
+	
+	public ReviewResource(ReviewDao reviewDao) {
+		this.reviewDao = reviewDao;
 	}
 
 	@POST
 	@Timed
 	public Response postReview(Optional<ReviewRequest> request) {
-		Collection<Review> reviews = null;
+		Review review = null;
 		if (request.isPresent()) {
-			reviews = ReviewDB.addReview(new Review(request.get()));
+			review = reviewDao.create(new Review(request.get()));
 		}
 		URI location = URI.create("reviews/" + request.get().getId());
-		return Response.created(location).entity(new ReviewSummary(reviews)).build();
+		return Response.created(location).entity(review).build();
 	}
 
 	@GET
 	@Timed
 	public ReviewSummary getReviews() {
-		return new ReviewSummary(ReviewDB.getReviews());
+		return new ReviewSummary(reviewDao.findAll());
 	}
 }
