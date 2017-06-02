@@ -15,6 +15,8 @@ import com.cardboard.reviews.model.Review;
 import com.cardboard.reviews.model.ReviewSummary;
 import com.codahale.metrics.annotation.Timed;
 
+import io.dropwizard.hibernate.UnitOfWork;
+
 @Path("/reviews")
 @Produces(MediaType.APPLICATION_JSON)
 public class ReviewResource {
@@ -27,6 +29,7 @@ public class ReviewResource {
 
 	@POST
 	@Timed
+	@UnitOfWork
 	public Response postReview(Optional<ReviewRequest> request) {
 		Review review = null;
 		if (request.isPresent()) {
@@ -38,6 +41,7 @@ public class ReviewResource {
 
 	@GET
 	@Timed
+	@UnitOfWork
 	public ReviewSummary getReviews() {
 		return new ReviewSummary(reviewDao.findAll());
 	}

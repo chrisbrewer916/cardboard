@@ -24,7 +24,8 @@ public class ReviewDao extends AbstractDAO<Review> {
         return persist(review);
     }
 
-    public List<Review> findAll() {
+    @SuppressWarnings("unchecked")
+	public List<Review> findAll() {
         return list(namedQuery("com.cardboard.reviews.model.Review.findAll"));
     }
 

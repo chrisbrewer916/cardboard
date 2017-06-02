@@ -20,9 +20,12 @@ public class Thing {
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	public Thing(String name) {
-		super();
+	public Thing() {
 		this.id = UUID.randomUUID();
+	}
+	
+	public Thing(String name) {
+		this();
 		this.name = name;
 	}
 

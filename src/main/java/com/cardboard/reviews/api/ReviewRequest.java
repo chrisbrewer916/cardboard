@@ -1,9 +1,14 @@
 package com.cardboard.reviews.api;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
-import com.cardboard.reviews.dao.ReviewDB;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
+import com.cardboard.reviews.model.User;
+import com.cardboard.reviews.service.ServiceFactory;
 
 public class ReviewRequest {
 
@@ -23,9 +28,16 @@ public class ReviewRequest {
 		this.date = new Date();
 	}
 
-	public ReviewRequest(String user, UUID thingId, int overallRating, String description) {
+	public ReviewRequest(String username, UUID thingId, int overallRating, String description) {
 		this();
-		this.userId = ReviewDB.getUser(user);
+		
+		Optional<User> user = ServiceFactory.getUserService().getUser(username);
+		if (user.isPresent()) {
+			this.userId = user.get().getId();
+		} else {
+			throw new WebApplicationException("Could not find user with username: " + username, Response.Status.NOT_FOUND);
+		}
+		
 		this.thingId = thingId;
 		this.overallRating = overallRating;
 		this.description = description;
